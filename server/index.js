@@ -31,3 +31,5 @@ massive({
 })
 
 
+app.post('/api/auth/register', authCtrl.register)
+app.post('/api/auth/login', authCtrl.login)
