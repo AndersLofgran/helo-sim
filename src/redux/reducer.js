@@ -1,21 +1,21 @@
 const initialState = {
-  id: '',
+  userId: '',
   username: '',
   profile_pic: '',
 }
 
-const UPDATE_USER_INFO = 'UPDATE_USER_INFO'
+const SHOW_USER_PROFILE = 'SHOW_USER_PROFILE'
 
 export function showUserProfile(username, profile_pic) {
   return {
-    type: UPDATE_USER_INFO,
+    type: SHOW_USER_PROFILE,
     payload: {username, profile_pic}
   }
 }
 
 export default function reducer(state = initialState, action) {
   switch(action.type) {
-    case UPDATE_USER_INFO:
+    case SHOW_USER_PROFILE:
       return {...state, username: action.payload.username, profile_pic: action.payload.profile_pic}
     default:
     return state

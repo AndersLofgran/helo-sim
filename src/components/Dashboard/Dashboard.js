@@ -1,5 +1,7 @@
 import React from 'react'
+import axios from 'axios'
 import Post from '../Post/Post'
+import {connect} from 'react-redux'
 import './Dashboard.css'
 
 class Dashboard extends React.Component {
@@ -12,12 +14,19 @@ class Dashboard extends React.Component {
     }
   }
   
+  componentDidMount() {
+    console.log(this.props)
+    axios.get(`/api/posts/1`).then(posts => {
+      this.setState({posts: posts.data})
+    })
+  }
+  
   render() {
     const allPosts = this.state.posts.map((post, i) => {
       return <Post  key={i}
                     title={post.title}
                     author={post.username}
-                    author_profile={post.profile_pic} />
+                    author_pic={post.profile_pic} />
     })
     
     return (
@@ -39,4 +48,6 @@ class Dashboard extends React.Component {
   }
 }
 
-export default Dashboard
+const mapStateToProps = reduxState => reduxState
+
+export default connect(mapStateToProps)(Dashboard)
