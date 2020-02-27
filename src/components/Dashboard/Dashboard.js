@@ -15,10 +15,33 @@ class Dashboard extends React.Component {
   }
   
   componentDidMount() {
-    console.log(this.props)
-    axios.get(`/api/posts/1`).then(posts => {
-      this.setState({posts: posts.data})
+    axios.get(`/api/posts/${this.props.user_id}?search=${this.state.search}&userPosts=${this.state.userPosts}`).then(res => {
+      this.setState({posts: res.data})
     })
+  }
+  
+  componentDidUpdate(preProps) {
+    if(this.props.user_id !== preProps.user_id) {
+      axios.get(`/api/posts/${this.props.user_id}?search=${this.state.search}&userPosts=${this.state.userPosts}`).then(res => {
+        this.setState({posts: res.data})
+      })
+    }
+  }
+
+  getAllPosts = () => {
+    axios.get(`/api/posts/${this.props.user_id}?search=${this.state.search}&userPosts=${this.state.userPosts}`).then(res => {
+      this.setState({posts: res.data})
+    })
+  }
+
+  deletePost = post_id => {
+    axios.delete(`/api/posts/${post_id}`).then(res => {
+      this.setState({posts: res.data})
+    })
+  }
+  
+  handleChange = ev => {
+    this.setState({search: ev.target.value})
   }
   
   render() {
@@ -26,23 +49,39 @@ class Dashboard extends React.Component {
       return <Post  key={i}
                     title={post.title}
                     author={post.username}
-                    author_pic={post.profile_pic} />
+                    content={post.content}
+                    author_pic={post.profile_pic}
+                    post_id={post.id}
+                    deletePost={this.deletePost} />
     })
     
     return (
       <>
         <div className='Dashboard'>
-          <div >Dashboard</div>
-          <input placeholder='Search by title'/>
-          <button>Search</button>
-          <button>Reset</button>
-          <div>
-            <div>My Posts</div>
-            <input  type='checkbox'
-                    value={this.state.userPosts} />
+          <div className='SearchBar' >
+            <div className='SearchBarElement' >
+              <input  className='SearchInput'
+                      onChange={this.handleChange}
+                      value={this.state.search}
+                      placeholder='Search by post title'/>
+              <img  onClick={this.getAllPosts}
+                    src='https://static.thenounproject.com/png/101791-200.png'/>
+              <button onClick={() => {
+                        this.getAllPosts()
+                        this.setState({search: '', userPosts: true})
+                      }} >Reset</button>
+            </div>
+            <div className='MyPosts' >
+              <div>My Posts</div>
+              <input  type='checkbox'
+                      onClick={() => this.setState({userPosts: !this.state.userPosts})}
+                      value={this.state.userPosts} />
+            </div>
           </div>
+        <div className='PostDisplay' >
+          {allPosts}
         </div>
-        {allPosts}
+        </div>
       </>
     )
   }

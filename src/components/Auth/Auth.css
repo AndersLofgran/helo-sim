@@ -1,0 +1,50 @@
+.Auth {
+  padding: 20px 80px;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  background: linear-gradient(90deg,#FF9770, #ffD670);
+  box-shadow: 0px 8px 7px 2px rgba(0,0,0,0.5);
+  border-radius: 5px;
+  color: white;
+}
+
+.HeloTitle {
+  font-size: 60px;
+  font-weight: bold;
+}
+
+.Auth > img {
+  margin: 0 auto;
+  height: 100px;
+  width: 100px;
+  filter: invert(1)
+}
+
+.AuthInput {
+  margin: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+  .AuthInput > input {
+    margin: 0 10px;
+    outline: none;
+    border: none;
+  }
+
+.AuthButtons {
+  display: flex;
+  align-items: center;
+  margin: 0 auto;
+}
+
+  .AuthButtons > button {
+    outline: none;
+    border: none;
+    border-radius: 2px;
+    margin: 0 20px;
+    padding: 10px;
+    background-color: #403D39;
+    color: white;
+  }

@@ -1,3 +1,25 @@
+* {
+  box-sizing: border-box;
+}
+
+button:hover, img:hover {
+  cursor: pointer;
+}
+
+html {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(90deg, #FF70A6, #FF9770, #FFD670, #E9FF70);
+}
+
 .App {
   text-align: center;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

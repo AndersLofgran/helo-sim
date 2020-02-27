@@ -17,10 +17,10 @@ module.exports = {
 
     let newUser = await db.register_user([username, hash, profile_pic])
     newUser = newUser[0]
-    // req.session.user = newUser
+    req.session.user = newUser
 
     console.log(`---new user ${username} registered---`)
-    res.status(200).send(newUser)
+    res.status(200).send(req.session.user)
   },
 
   login: async (req, res) => {
@@ -36,17 +36,18 @@ module.exports = {
     const authenticated = bcrypt.compareSync(password, user.password)
     if(authenticated) {
       delete user.password
-      // req.session.user = user
+      req.session.user = user
       
       console.log(`---user ${username} logged in---`)
-      res.status(200).send(user)
+      res.status(200).send(req.session.user)
     } else {
       res.status(401).send(console.log('Incorrect password'))
     }
   },
 
-  // login:  (req, res) => {},
-
-  // login:  (req, res) => {},
-  
+  logout: async (req, res) => {
+    console.log(`---user logged out---`)
+    req.session.destroy()
+    res.sendStatus(200)
+  }
 }

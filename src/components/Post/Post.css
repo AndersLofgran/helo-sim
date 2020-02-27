@@ -1,0 +1,41 @@
+.Post {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 20px;
+  background-color: white;
+  box-shadow: 0px 1px 3px 1px rgba(0,0,0,0.2);
+}
+
+.Post > button {
+  height: fit-content;
+  outline: none;
+  border: none;
+  border-radius: 2px;
+  padding: 3px 5px;
+  background-color: #403D39;
+  color: white;
+}
+
+  .PostTitle {
+    margin: 20px;
+    text-align: left;
+    font-size: 30px;
+    font-weight: bold;
+  }
+  .PostAuthor {
+    display: flex;
+    justify-content: flex-end;
+    align-items: baseline;
+  }
+    .AuthorName {
+      height: fit-content;
+    }
+    .PostImage {
+      margin: 10px;
+      height: 60px;
+      width: 60px;
+      border-radius: 50%;
+      border: solid 1px rgba(0,0,0,0.2);
+      background-color: white;
+    }

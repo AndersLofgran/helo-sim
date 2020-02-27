@@ -1,14 +1,19 @@
 import React from 'react'
+import './Post.css'
 
 class Post extends React.Component {
   render() {
-    const {title, author, author_pic} = this.props
+    const {title, author, author_pic, post_id} = this.props
     return (
-    <div>
-      <div>Title: {title}</div>
-      <div>OP: {author}</div>
-      <img src={author_pic} />
-    </div>
+      <div className="Post" >
+          <div className='PostTitle' > {title} </div>
+          <button onClick={() => this.props.deletePost(post_id)} >Delete</button>
+          <div className='PostAuthor' >
+            <div className='AuthorName' >by {author}</div>
+            <img  className='PostImage'
+                  src={author_pic} />
+          </div>
+      </div>
     )
   }
 }
