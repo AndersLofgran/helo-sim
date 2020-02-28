@@ -20,14 +20,14 @@ class Auth extends React.Component {
   login = () => {
     axios.post('/api/auth/login', {username: this.state.username, password: this.state.password}).then(user => {
       this.props.history.push('/dashboard')
-      this.props.showUserProfile(user.data.id, user.data.username, user.data.profile_pic)
+      this.props.showUserProfile(user.data.username, user.data.profile_pic)
     })
   }
   
   register = () => {
     axios.post('/api/auth/register', {username: this.state.username, password: this.state.password, profile_pic: `https://robohash.org/${this.state.password}.png`}).then(user => {
       this.props.history.push('/dashboard')
-      this.props.showUserProfile(user.data.id, user.data.username, user.data.profile_pic)
+      this.props.showUserProfile(user.data.username, user.data.profile_pic)
     })
   }
   

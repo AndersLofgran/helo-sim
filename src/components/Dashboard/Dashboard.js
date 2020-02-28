@@ -1,7 +1,6 @@
 import React from 'react'
 import axios from 'axios'
 import Post from '../Post/Post'
-import {connect} from 'react-redux'
 import './Dashboard.css'
 
 class Dashboard extends React.Component {
@@ -15,21 +14,13 @@ class Dashboard extends React.Component {
   }
   
   componentDidMount() {
-    axios.get(`/api/posts/${this.props.user_id}?search=${this.state.search}&userPosts=${this.state.userPosts}`).then(res => {
+    axios.get(`/api/posts?search=${this.state.search}&userPosts=${this.state.userPosts}`).then(res => {
       this.setState({posts: res.data})
     })
   }
-  
-  componentDidUpdate(preProps) {
-    if(this.props.user_id !== preProps.user_id) {
-      axios.get(`/api/posts/${this.props.user_id}?search=${this.state.search}&userPosts=${this.state.userPosts}`).then(res => {
-        this.setState({posts: res.data})
-      })
-    }
-  }
 
   getAllPosts = () => {
-    axios.get(`/api/posts/${this.props.user_id}?search=${this.state.search}&userPosts=${this.state.userPosts}`).then(res => {
+    axios.get(`/api/posts?search=${this.state.search}&userPosts=${this.state.userPosts}`).then(res => {
       this.setState({posts: res.data})
     })
   }
@@ -87,6 +78,4 @@ class Dashboard extends React.Component {
   }
 }
 
-const mapStateToProps = reduxState => reduxState
-
-export default connect(mapStateToProps)(Dashboard)
+export default Dashboard

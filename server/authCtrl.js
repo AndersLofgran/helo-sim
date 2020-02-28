@@ -26,13 +26,13 @@ module.exports = {
   login: async (req, res) => {
     const {username, password} = req.body
     const db = req.app.get('db')
-
+    
     let user = await db.check_user([username])
     user = user[0]
     if(!user) {
       return res.status(400).send(console.log('Username not found/registered'))
     }
-
+    
     const authenticated = bcrypt.compareSync(password, user.password)
     if(authenticated) {
       delete user.password
@@ -44,7 +44,15 @@ module.exports = {
       res.status(401).send(console.log('Incorrect password'))
     }
   },
+  
+  me: async (req, res) => {
+    const db = req.app.get('db')
+    
+    let userProfile = await db.show_user_profile([req.session.user.id])
 
+    res.status(200).send(userProfile[0])
+  },
+  
   logout: async (req, res) => {
     console.log(`---user logged out---`)
     req.session.destroy()

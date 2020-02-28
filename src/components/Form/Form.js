@@ -1,5 +1,4 @@
 import React from 'react'
-import {connect} from 'react-redux'
 import axios from 'axios'
 import './Form.css'
 
@@ -18,8 +17,8 @@ class Form extends React.Component {
     this.setState({[ev.target.name]: ev.target.value})
   }
 
-  submitNewPost = user_id => {
-    axios.post(`/api/posts/${user_id}`, {title: this.state.title, img: this.state.img, content: this.state.content})
+  submitNewPost = () => {
+    axios.post(`/api/posts`, {title: this.state.title, img: this.state.img, content: this.state.content})
     this.props.history.push('/dashboard')
   }
   
@@ -57,6 +56,4 @@ class Form extends React.Component {
   }
 }
 
-const mapStateToProps = reduxState => reduxState
-
-export default connect(mapStateToProps)(Form)
+export default Form

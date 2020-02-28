@@ -1,10 +1,8 @@
 module.exports = {
 
   getAllPosts: async (req, res) => {
-    const {user_id} = req.params
     const {userPosts, search} = req.query
-    // console.log('req.params: ', req.params);
-    // console.log('req.query: ', req.query);
+    console.log('userPosts, search: ', userPosts, search);
     const db = req.app.get('db')
 
     let posts = []
@@ -17,28 +15,31 @@ module.exports = {
     }
 
     if(userPosts === "false" && !search) {
-      let filteredPosts = posts.filter(post => post.author_id !== +user_id)
+      let filteredPosts = posts.filter(post => post.author_id !== +req.session.user_id)
       return res.status(200).send(filteredPosts)
     }
 
-    // if(userPosts === "false" && search) {
-    //   let filteredPosts = posts.filter(post => {
-    //     let includesSearch = post.includes(search)
-    //     if(post.author_id !== +user_id && includesSearch) {
-    //       return res.status(200).send(filteredPosts)
-    //     }
-    //   })
-    // }
+    if(userPosts === "false" && search) {
+      let filteredPosts = []
+      posts.filter(post => {
+        let includesSearch = post.title.includes(search)
+        if(post.author_id !== +req.session.user.id && includesSearch) {
+          filteredPosts.push(post)
+          console.log(req.session.user.id)
+        }
+      })
+      
+      return res.status(200).send(filteredPosts)
+    }
     
     res.status(200).send(posts)
   },
 
   createNewPost: async (req, res) => {
-    const {user_id} = req.params
     const {title, img, content} = req.body
     const db = req.app.get('db')
     
-    await db.create_new_post([title, img, content, user_id])
+    await db.create_new_post([title, img, content, rqe.session.user_id])
     
     res.sendStatus(200)
   },

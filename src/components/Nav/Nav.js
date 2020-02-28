@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import {connect} from 'react-redux'
+import {showUserProfile} from '../../redux/reducer'
 import axios from 'axios'
 import './Nav.css'
 
@@ -8,6 +9,12 @@ class Nav extends React.Component {
 
   logout = () => {
     axios.post('/api/auth/logout')
+  }
+  
+  componentDidMount = () => {
+    axios.get('/api/auth/me').then(res => {
+      this.props.showUserProfile(res.data.username, res.data.profile_pic)
+    })
   }
   
   render() {
@@ -41,4 +48,4 @@ class Nav extends React.Component {
 
 const mapStateToProps = reduxState => reduxState
 
-export default connect(mapStateToProps)(Nav)
+export default connect(mapStateToProps, {showUserProfile})(Nav)
