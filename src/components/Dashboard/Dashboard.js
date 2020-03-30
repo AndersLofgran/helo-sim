@@ -48,6 +48,10 @@ class Dashboard extends React.Component {
     
     return (
       <>
+      {/* <link src='url' />
+      <section>Here's a section</section>
+      <script> let test = 2 </script> */}
+      
         <div className='Dashboard'>
           <div className='SearchBar' >
             <div className='SearchBarElement' >

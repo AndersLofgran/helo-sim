@@ -44,6 +44,14 @@ module.exports = {
       res.status(401).send(console.log('Incorrect password'))
     }
   },
+
+  checkUser: req => {
+    if(req.session.user.id){
+      next()
+    } else {
+      console.log('new user logged in')
+    }
+  },
   
   me: async (req, res) => {
     const db = req.app.get('db')

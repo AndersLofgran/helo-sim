@@ -32,7 +32,7 @@ massive({
 
 
 app.post('/api/auth/register', authCtrl.register)
-app.post('/api/auth/login', authCtrl.login)
+app.post('/api/auth/login', authCtrl.checkUser, authCtrl.login)
 app.get('/api/auth/me', authCtrl.me)
 app.post('/api/auth/logout', authCtrl.logout)
 

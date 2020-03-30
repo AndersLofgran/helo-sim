@@ -51,3 +51,25 @@
   display: flex;
   align-items: center;
 }
+
+/* 
+section {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 5px;
+  grid-auto-rows: minmax(50px, auto);
+  
+  height: 50px;
+  position: relative;
+  animation-name: example;
+  animation-duration: 2s;
+  :hover {
+    height: 100px;
+  }
+} 
+
+@keyframes example {
+  from {background-color: green;}
+  to {background-color: blue;}
+}
+*/
